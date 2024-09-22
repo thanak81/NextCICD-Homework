@@ -3,7 +3,7 @@ pipeline{
     stages {
         stage ("Clean Workspace"){
             steps{
-                sh "cleanWs()"
+                cleanWs()
             }
         }
         stage ("Checkout from SCM"){
@@ -11,6 +11,5 @@ pipeline{
                 git branch: "main", credentialsId: "github", url: "https://github.com/thanak81/NextCICD-Homework.git"
             }
         }
-            
     }
 }
