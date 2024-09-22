@@ -1,10 +1,14 @@
 pipeline{
     agent any;
     stages {
-        stage ("Testing"){
+        stage ("Clean Workspace"){
             steps{
-                            sh "echo helloworld"
+                sh "cleanWs()"
             }
         }
+        stage ("Checkout from SCM")
+            steps{
+                git branch: "main" credentialsId: "github", url: "https://github.com/thanak81/NextCICD-Homework.git"
+            }
     }
 }
