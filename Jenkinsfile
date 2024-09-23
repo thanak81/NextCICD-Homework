@@ -42,7 +42,7 @@ pipeline{
                 script {
                 sh """
                     cat k8s/deployment.yaml
-                    sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g k8s/deployment.yaml'
+                    sed -i 's|image: ${DOCKER_USER}/${APP_NAME}:.*|image: ${DOCKER_USER}/${APP_NAME}:${IMAGE_TAG}|' k8s/deployment.yaml
                     cat k8s/deployment.yaml
                 """
                 }
