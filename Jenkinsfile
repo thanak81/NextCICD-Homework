@@ -37,6 +37,18 @@ pipeline{
                 git branch : "main" , credentialsId: "github" , url : "https://github.com/thanak81/nextcicd-k8s_manifest.git"
             }
         }
+           stage ("Update the Deployment Tags"){
+            steps {
+                script {
+                sh """
+                    cat k8s/deployment.yaml
+                    sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g k8s/deployment.yaml'
+                    cat k8s/deployment.yaml
+                """
+                }
+              
+            }
+        }
     stage ("Push the changed deployment file to GIT"){
             steps{
                 script {
