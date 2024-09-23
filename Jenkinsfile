@@ -46,8 +46,11 @@ pipeline{
                     git add k8s/deployment.yaml
                     git commit -m "Updated Deployment Manifest"
                 """
-                withCredentials([gitUsernamePassword[credentialsId: "github", gitToolName: "Default"]]){
-                    sh "git push https://github.com/thanak81/nextcicd-k8s_manifest.git main"
+                // withCredentials([gitUsernamePassword[credentialsId: "github", gitToolName: "Default"]]){
+                //     sh "git push https://github.com/thanak81/nextcicd-k8s_manifest.git main"
+                // }
+                withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                    sh "git push https://$USERNAME:$PASSWORD@github.com/thanak81/nextcicd-k8s_manifest.git main"
                 }
                 }
                
