@@ -32,5 +32,26 @@ pipeline{
                 }
             }
         }
+        stage ("Checkout from Our K8S manifest repository"){
+            steps{
+                git branch : "main" , credentialsId: "github" , url : "https://github.com/thanak81/nextcicd-k8s_manifest.git"
+            }
+        }
+    stage ("Push the changed deployment file to GIT"){
+            steps{
+                script {
+                sh """
+                    git config --global user.name "thanak81"
+                    git config --global user.email "thanakmech@gmail.com"
+                    git add k8s/deployment.yaml
+                    git commit -m "Updated Deployment Manifest"
+                """
+                withCredentials([gitUsernamePassword[credentialsId: "github", gitToolName: "Default"]]){
+                    sh "git push https://github.com/thanak81/nextcicd-k8s_manifest.git main"
+                }
+                }
+               
+            }
+        }
     }
 }
