@@ -12,7 +12,7 @@ pipeline {
                 sh "docker build -t thanak81/nextcicd-homework-2k25 ."
             }
         }
-        stage ("Login to DockerHub"){
+        stage ("Login to DockerHubs"){
             steps{
                 script {
                         withCredentials([usernamePassword(credentialsId: "dockerhub-credentials",
