@@ -9,7 +9,7 @@ pipeline {
         }
         stage ("Build DockerFile"){
             steps{
-                sh "docker -t thanak81/nextcicd-homework-2k25"
+                sh "docker build -t thanak81/nextcicd-homework-2k25 ."
             }
         }
         stage ("Login to DockerHub"){
